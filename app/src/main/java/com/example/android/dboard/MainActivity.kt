@@ -1,6 +1,5 @@
 package com.example.android.dboard
 
-import android.graphics.drawable.Icon
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -15,19 +14,24 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.input.BackspaceCommand
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.lifecycleScope
+import androidx.window.WindowLayoutInfo
+import com.example.android.dboard.ui.DBoardButtonType
 import com.example.android.dboard.ui.theme.DBoardTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContent {
-            DBoardTheme {
-                // A surface container using the 'background' color from the theme
-                Surface(color = MaterialTheme.colors.background) {
-                    // Add DBoard
+        lifecycleScope.launchWhenResumed {
+            setContent {
+
+                DBoardTheme {
+                    // A surface container using the 'background' color from the theme
+                    Surface(color = MaterialTheme.colors.background) {
+                        // Add DBoard
+                    }
                 }
             }
         }
@@ -72,10 +76,6 @@ fun DboardRow(
 @Composable
 fun DboardButton(
     text: String,
-    icon: Icon?,
-    isBackspaceCommand: Boolean,
-    isClear: Boolean,
-    isMicrophone: Boolean,
     callback: (text: String) -> Any,
     modifier: Modifier = Modifier
 ) {
@@ -92,20 +92,19 @@ fun DboardButton(
 
 fun handleButtonClick(
     txt: String,
-    inputTextView: MutableState<String>,
-    outputTextView: MutableState<String>,
+    dBoardButtonType: DBoardButtonType,
+    inputTextView: MutableState<String>
 ) {
-    when (txt) {
-        "" -> if (inputTextView.value.isNotEmpty()) {
-            inputTextView.value = ""
-        } else {
-            outputTextView.value = ""
+    dBoardButtonType.let { type ->
+        when (type) {
+            DBoardButtonType.CLEAR -> inputTextView.value = ""
+            DBoardButtonType.DELETE -> inputTextView.value.dropLast(1)
+            DBoardButtonType.SPACE -> inputTextView.value += " "
+            else -> inputTextView.value += txt
         }
-        "+", "-", "=" -> handleInput(inputTextView, outputTextView, txt)
-        ":" -> inputTextView.value += txt
-        else -> inputTextView.value += txt
     }
 }
+
 
 @Preview(showBackground = true)
 @Composable
