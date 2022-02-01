@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">DBoard</string>
+    <string name="input_hint">Search</string>
+</resources>
