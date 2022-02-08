@@ -14,6 +14,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.android.dboard.ui.theme.DPlusTheme
@@ -37,20 +38,18 @@ fun Dboard() {
             .background(color = MaterialTheme.colors.background),
         contentAlignment = Alignment.TopStart
     ) {
-        val width = 600.dp
         Row(
             modifier = Modifier
-                .fillMaxSize()
+                .fillMaxWidth()
                 .background(color = MaterialTheme.colors.surface)
         ) {
-            Column(
-                modifier = Modifier
-                    .width(width)
-            ) {
-                Column(
+            Column {
+                Row(
                     modifier = Modifier
                         .padding(16.dp)
                         .weight(1.0F)
+                        .background(color = Color.White)
+                        .fillMaxWidth()
                 ) {
                     SearchInput(input.value)
                     Spacer(modifier = Modifier.height(16.dp))
