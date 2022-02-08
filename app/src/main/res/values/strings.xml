@@ -2,4 +2,7 @@
     <string name="app_name">DBoard</string>
     <string name="input_hint">Search Input</string>
     <string name="search">search</string>
+    <string name="delete_char">Delete</string>
+    <string name="backspace">backspace</string>
+    <string name="space">space</string>
 </resources>

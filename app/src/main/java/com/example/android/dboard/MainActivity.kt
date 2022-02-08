@@ -11,6 +11,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.lifecycleScope
@@ -93,7 +94,7 @@ fun DboardButton(
             callback(text)
         }
     ) {
-        Text(text)
+        Text(textAlign = TextAlign.Center, text = text)
     }
 }
 

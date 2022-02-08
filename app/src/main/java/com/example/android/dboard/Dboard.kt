@@ -31,20 +31,11 @@ fun Dboard() {
         scope.launch { state.animateScrollTo(state.maxValue) }
     }
 
-    val displayMetrics = DisplayMetrics()
-    val density: Float = displayMetrics.density
-    val dpWidth: Float = displayMetrics.widthPixels / density
-
-    val largeScreen = dpWidth >= 600
-
     BoxWithConstraints(
         modifier = Modifier
             .fillMaxSize()
             .background(color = MaterialTheme.colors.background),
-        contentAlignment = if (largeScreen)
-            Alignment.TopStart
-        else
-            Alignment.Center
+        contentAlignment = Alignment.TopStart
     ) {
         val width = 600.dp
         Row(
@@ -67,6 +58,8 @@ fun Dboard() {
                 Spacer(modifier = Modifier.height(16.dp))
                 Column(
                     modifier = Modifier
+                        .align(Alignment.Start)
+                        .width(300.dp)
                         .background(color = MaterialTheme.colors.primarySurface)
                         .padding(16.dp)
                 ) {
@@ -107,10 +100,10 @@ fun Dboard() {
     }
 }
 
-@Preview(showBackground = true)
-@Composable
-fun DboardPreview() {
-    DPlusTheme {
-        Dboard()
-    }
-}
+//@Preview(showBackground = true)
+//@Composable
+//fun DboardPreview() {
+//    DPlusTheme {
+//        Dboard()
+//    }
+//}
