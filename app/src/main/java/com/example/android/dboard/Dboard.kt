@@ -43,7 +43,11 @@ fun Dboard() {
                 .fillMaxWidth()
                 .background(color = MaterialTheme.colors.surface)
         ) {
-            Column {
+            Column(
+                modifier = Modifier
+                    .padding(16.dp)
+                    .fillMaxWidth()
+            ) {
                 Row(
                     modifier = Modifier
                         .padding(16.dp)

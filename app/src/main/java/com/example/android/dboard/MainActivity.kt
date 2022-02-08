@@ -44,17 +44,23 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun SearchInput(t: String) {
     val showHint = t.isEmpty()
-    Text(
-        text = if (showHint)
-            stringResource(id = R.string.input_hint)
-        else
-            t,
-        color = if (showHint)
-            Color.Gray
-        else
-            MaterialTheme.colors.primary,
-        style = MaterialTheme.typography.h4
-    )
+    Row(
+        modifier = Modifier
+            .padding(16.dp)
+            .fillMaxWidth()
+    ){
+        Text(
+            text = if (showHint)
+                stringResource(id = R.string.input_hint)
+            else
+                t,
+            color = if (showHint)
+                Color.Gray
+            else
+                MaterialTheme.colors.primary,
+            style = MaterialTheme.typography.h4
+        )
+    }
 }
 
 @Preview
