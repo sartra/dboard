@@ -3,7 +3,6 @@ package com.example.android.dboard
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -17,6 +16,8 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.lifecycleScope
+import com.example.android.dboard.model.DboardModel
+import com.example.android.dboard.ui.DboardButtonType
 import com.example.android.dboard.ui.theme.DPlusTheme
 
 class MainActivity : ComponentActivity() {
@@ -48,7 +49,7 @@ fun SearchInput(t: String) {
         modifier = Modifier
             .padding(16.dp)
             .fillMaxWidth()
-    ){
+    ) {
         Text(
             text = if (showHint)
                 stringResource(id = R.string.input_hint)
@@ -108,20 +109,20 @@ fun DboardButton(
 
 fun handleButtonClick(
     txt: String,
-//    dBoardButtonType: DBoardButtonType,
+    dBoardButtonType: DboardButtonType,
     inputTextView: MutableState<String>
 ) {
 
-    inputTextView.value += txt
+//    inputTextView.value += txt
 
-//    dBoardButtonType.let { type ->
-//        when (type) {
-//            DBoardButtonType.CLEAR -> inputTextView.value = ""
-//            DBoardButtonType.DELETE -> inputTextView.value.dropLast(1)
-//            DBoardButtonType.SPACE -> inputTextView.value += " "
-//            else -> inputTextView.value += txt
-//        }
-//    }
+    dBoardButtonType.let { type ->
+        when (type) {
+            DboardButtonType.Clear -> inputTextView.value = ""
+            DboardButtonType.Delete -> inputTextView.value.dropLast(1)
+            DboardButtonType.Space -> inputTextView.value += " "
+            else -> inputTextView.value += txt
+        }
+    }
 }
 
 @Preview(showBackground = true)

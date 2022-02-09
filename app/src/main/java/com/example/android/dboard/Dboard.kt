@@ -1,12 +1,9 @@
 package com.example.android.dboard
 
-import android.util.DisplayMetrics
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
 import androidx.compose.material.primarySurface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
@@ -17,6 +14,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.example.android.dboard.model.DboardModel
+import com.example.android.dboard.ui.DboardButtonType
 import com.example.android.dboard.ui.theme.DPlusTheme
 import kotlinx.coroutines.launch
 
@@ -25,10 +24,10 @@ fun Dboard() {
     val input = remember { mutableStateOf("") }
     val state = rememberScrollState()
     val scope = rememberCoroutineScope()
-//    val buttonType = DBoardButtonType.CHAR
+    val buttonType = DboardButtonType.Char
     val callback = { text: String ->
 //        handleButtonClick(text, buttonType, input)
-        handleButtonClick(text, input)
+        handleButtonClick(text, buttonType, input)
         scope.launch { state.animateScrollTo(state.maxValue) }
     }
 
@@ -103,10 +102,12 @@ fun Dboard() {
     }
 }
 
-//@Preview(showBackground = true)
-//@Composable
-//fun DboardPreview() {
-//    DPlusTheme {
-//        Dboard()
-//    }
-//}
+@Preview(showBackground = true)
+@Composable
+fun DboardPreview() {
+    DPlusTheme {
+        Dboard(
+
+        )
+    }
+}

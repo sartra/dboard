@@ -20,8 +20,8 @@ fun BackspaceIcon() {
     )
 }
 
-//@Preview
-//@Composable
-//fun BackspaceIconPreview() {
-//    BackspaceIcon()
-//}
+@Preview
+@Composable
+fun BackspaceIconPreview() {
+    BackspaceIcon()
+}
