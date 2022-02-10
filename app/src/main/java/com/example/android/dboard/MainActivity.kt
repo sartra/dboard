@@ -20,6 +20,7 @@ import androidx.lifecycle.lifecycleScope
 import com.example.android.dboard.model.DboardButtonModel
 import com.example.android.dboard.model.DboardModel
 import com.example.android.dboard.ui.DboardButtonType
+import com.example.android.dboard.ui.theme.AppTheme
 import com.example.android.dboard.ui.theme.DPlusTheme
 import com.example.android.dboard.ui.theme.appColors
 
@@ -30,15 +31,15 @@ class MainActivity : ComponentActivity() {
             setContent {
                 DPlusTheme(
                     content = {
-                            Dboard(
-                                DboardModel(
-                                    language = "en",
-                                    keys = "abcdefghijklmnopqrstuvwxyz0123456789".toList(),
-                                    hasVoiceInput = false
-                                )
+                        Dboard(
+                            DboardModel(
+                                language = "en",
+                                keys = "abcdefghijklmnopqrstuvwxyz0123456789".toList(),
+                                hasVoiceInput = false
                             )
-                        }
-                    )
+                        )
+                    }
+                )
             }
         }
     }
@@ -94,21 +95,20 @@ fun DboardButton(
     modifier: Modifier = Modifier
 ) {
     Button(
+        colors = ButtonDefaults.buttonColors(backgroundColor = MaterialTheme.colors.onBackground),
         modifier = modifier
-            .padding(4.dp)
-            .background(Color.Magenta),
+            .padding(2.dp),
         onClick = model.callback
     ) {
-        Text(textAlign = TextAlign.Center, text = model.char.toString())
+        Text(textAlign = TextAlign.Center, text = model.char.toString(), color= Color.White)
     }
 }
 
 fun handleButtonClick(
-    txt: String,
+    txt: String? = "",
     dBoardButtonType: DboardButtonType,
     inputTextView: MutableState<String>
 ) {
-
     dBoardButtonType.let { type ->
         when (type) {
             DboardButtonType.Clear -> inputTextView.value = ""

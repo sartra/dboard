@@ -54,7 +54,6 @@ fun Dboard(model: DboardModel) {
                     // loop through a-z, 0-9
                     val buttonsRow = mutableListOf<DboardButtonModel>()
                     for ((i, value) in model.keys.withIndex()) {
-//                        val button = DboardButtonModel(char = value, callback = callback)
                         val button = DboardButtonModel(char = value, callback = {
                             handleButtonClick(value.toString(), DboardButtonType.Char, input)
                         })
@@ -64,6 +63,13 @@ fun Dboard(model: DboardModel) {
                             buttonsRow.clear()
                         }
                     }
+
+                    val spaceRow = mutableListOf<DboardButtonModel>()
+                    val spaceButton = DboardButtonModel(callback = {
+                        handleButtonClick(dBoardButtonType = DboardButtonType.Space, inputTextView = input)
+                    })
+                    spaceRow.add(spaceButton)
+                    DboardRow(buttons = spaceRow)
                 }
                 Spacer(modifier = Modifier.height(16.dp))
             }

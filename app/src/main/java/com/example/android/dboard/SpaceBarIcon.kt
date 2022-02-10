@@ -13,7 +13,7 @@ import androidx.compose.ui.tooling.preview.Preview
 @Composable
 fun SpaceBarIcon() {
     Image(
-        modifier = Modifier.padding(top = dimensionResource(R.dimen.grid_4), start = dimensionResource(R.dimen.grid_8)),
+        modifier = Modifier.padding(top = dimensionResource(R.dimen.grid_4)),
         painter = painterResource(R.drawable.ic_spacebar),
         contentDescription = stringResource(R.string.space),
         alignment = Alignment.Center
