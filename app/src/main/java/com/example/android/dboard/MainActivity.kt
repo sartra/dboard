@@ -4,9 +4,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
@@ -65,8 +63,11 @@ fun SearchInput(t: String) {
             color = if (showHint)
                 Neutral6
             else
-                Neutral1,
-            style = DPlusTypography.sectionExtraLargeLight
+                Neutral10,
+            style = if (showHint)
+                DPlusTypography.sectionExtraLargeLight
+            else
+                DPlusTypography.subTitleLarge
         )
     }
 }
@@ -84,7 +85,8 @@ fun DboardButton(
 ) {
     Button(
         modifier = modifier
-            .padding(4.dp),
+            .padding(2.dp)
+            .background(Neutral3_50),
         onClick = model.onClick
     ) {
         Text(textAlign = TextAlign.Center, text = model.char.toString())
@@ -127,7 +129,7 @@ fun DboardRow(
 }
 
 
-@Preview(showBackground = true)
+@Preview(showBackground = false)
 @Composable
 fun DefaultPreview() {
     DPlusTheme {

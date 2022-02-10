@@ -17,6 +17,7 @@ import com.example.android.dboard.model.DboardModel
 import com.example.android.dboard.ui.DboardButtonType
 import com.example.android.dboard.ui.DboardButtonType.Char
 import com.example.android.dboard.ui.theme.DPlusTheme
+import com.example.android.dboard.ui.theme.Neutral1
 
 @Composable
 fun Dboard(model: DboardModel) {
@@ -46,7 +47,6 @@ fun Dboard(model: DboardModel) {
                     modifier = Modifier
                         .padding(16.dp)
                         .weight(1.0F)
-                        .background(color = Color.White)
                         .fillMaxWidth()
                 ) {
                     SearchInput(input.value)
