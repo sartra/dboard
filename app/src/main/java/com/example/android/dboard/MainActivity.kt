@@ -3,6 +3,7 @@ package com.example.android.dboard
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -16,9 +17,11 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.lifecycleScope
+import com.example.android.dboard.model.DboardButtonModel
 import com.example.android.dboard.model.DboardModel
 import com.example.android.dboard.ui.DboardButtonType
 import com.example.android.dboard.ui.theme.DPlusTheme
+import com.example.android.dboard.ui.theme.appColors
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -27,16 +30,15 @@ class MainActivity : ComponentActivity() {
             setContent {
                 DPlusTheme(
                     content = {
-                        Scaffold(
-                            topBar = {
-                                TopAppBar(title = {
-                                    Text(stringResource(id = R.string.search))
-                                })
-                            }
-                        ) {
-                            Dboard()
+                            Dboard(
+                                DboardModel(
+                                    language = "en",
+                                    keys = "abcdefghijklmnopqrstuvwxyz0123456789".toList(),
+                                    hasVoiceInput = false
+                                )
+                            )
                         }
-                    })
+                    )
             }
         }
     }
@@ -58,8 +60,8 @@ fun SearchInput(t: String) {
             color = if (showHint)
                 Color.Gray
             else
-                MaterialTheme.colors.primary,
-            style = MaterialTheme.typography.h4
+                Color.LightGray,
+            style = MaterialTheme.typography.h5
         )
     }
 }
@@ -70,21 +72,17 @@ fun SearchInputPreview() {
     SearchInput(t = "search input")
 }
 
-
 @Composable
 fun DboardRow(
-    texts: List<String>,
-    weights: List<Float>,
-    callback: (text: String) -> Any
+    buttons: List<DboardButtonModel>,
 ) {
     Row(
         modifier = Modifier.fillMaxWidth()
     ) {
-        for (i in texts.indices) {
+        for (i in buttons) {
             DboardButton(
-                text = texts[i],
-                modifier = Modifier.weight(weights[i]),
-                callback = callback
+                i,
+                modifier = Modifier.weight(1F)
             )
         }
     }
@@ -92,18 +90,16 @@ fun DboardRow(
 
 @Composable
 fun DboardButton(
-    text: String,
-    callback: (text: String) -> Any,
+    model: DboardButtonModel,
     modifier: Modifier = Modifier
 ) {
     Button(
         modifier = modifier
-            .padding(4.dp),
-        onClick = {
-            callback(text)
-        }
+            .padding(4.dp)
+            .background(Color.Magenta),
+        onClick = model.callback
     ) {
-        Text(textAlign = TextAlign.Center, text = text)
+        Text(textAlign = TextAlign.Center, text = model.char.toString())
     }
 }
 

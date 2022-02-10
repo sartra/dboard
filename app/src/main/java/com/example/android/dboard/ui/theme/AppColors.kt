@@ -22,7 +22,7 @@ fun appColors(
     surface: Color = BrandLight,
     error: Color = AlertDim,
     onPrimary: Color = Neutral10,
-    onSecondary: Color = Neutral8,
+    onSecondary: Color =  Neutral4_50,
     onBackground: Color = Neutral7,
     onSurface: Color = Neutral8,
     onError: Color = Neutral10,
@@ -80,7 +80,7 @@ val Neutral10 = Color(0xFFFFFFFF)
 val Neutral1_60 = Color(0x66000000)
 val Neutral2_70 = Color(0xB3282D33)
 val Neutral3_80 = Color(0xCC383E47)
-val Neutral4_50 = Color(0x80545A62)
+val Neutral4_50 = Color(0x80807A7E)
 val Neutral5_50 = Color(0x806C727A)
 val Neutral6_30 = Color(0x4D838991)
 val Neutral9_50 = Color(0x80D6DCE4)
