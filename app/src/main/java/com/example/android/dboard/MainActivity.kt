@@ -16,6 +16,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.lifecycleScope
+import com.example.android.dboard.model.DboardButtonModel
 import com.example.android.dboard.model.DboardModel
 import com.example.android.dboard.ui.DboardButtonType
 import com.example.android.dboard.ui.theme.DPlusTheme
@@ -34,7 +35,13 @@ class MainActivity : ComponentActivity() {
                                 })
                             }
                         ) {
-                            Dboard()
+                            Dboard(
+                                DboardModel(
+                                    language = "en",
+                                    keys = "abcdefghijklmnopqrstuvwxyz0123456789".toList(),
+                                    hasVoiceInput = false
+                                )
+                            )
                         }
                     })
             }
@@ -70,40 +77,19 @@ fun SearchInputPreview() {
     SearchInput(t = "search input")
 }
 
-
-@Composable
-fun DboardRow(
-    texts: List<String>,
-    weights: List<Float>,
-    callback: (text: String) -> Any
-) {
-    Row(
-        modifier = Modifier.fillMaxWidth()
-    ) {
-        for (i in texts.indices) {
-            DboardButton(
-                text = texts[i],
-                modifier = Modifier.weight(weights[i]),
-                callback = callback
-            )
-        }
-    }
-}
-
 @Composable
 fun DboardButton(
-    text: String,
-    callback: (text: String) -> Any,
+    model: DboardButtonModel,
     modifier: Modifier = Modifier
 ) {
     Button(
         modifier = modifier
             .padding(4.dp),
         onClick = {
-            callback(text)
+            model.callback
         }
     ) {
-        Text(textAlign = TextAlign.Center, text = text)
+        Text(textAlign = TextAlign.Center, text = model.char.toString())
     }
 }
 
@@ -124,6 +110,24 @@ fun handleButtonClick(
         }
     }
 }
+
+
+@Composable
+fun DboardRow(
+    buttons: List<DboardButtonModel>,
+) {
+    Row(
+        modifier = Modifier.fillMaxWidth()
+    ) {
+        for (i in buttons) {
+            DboardButton(
+                i,
+                modifier = Modifier.weight(1F),
+            )
+        }
+    }
+}
+
 
 @Preview(showBackground = true)
 @Composable
