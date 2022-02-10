@@ -3,6 +3,7 @@ package com.example.android.dboard
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -10,7 +11,6 @@ import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
@@ -19,7 +19,7 @@ import androidx.lifecycle.lifecycleScope
 import com.example.android.dboard.model.DboardButtonModel
 import com.example.android.dboard.model.DboardModel
 import com.example.android.dboard.ui.DboardButtonType
-import com.example.android.dboard.ui.theme.DPlusTheme
+import com.example.android.dboard.ui.theme.*
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -59,14 +59,14 @@ fun SearchInput(t: String) {
     ) {
         Text(
             text = if (showHint)
-                stringResource(id = R.string.input_hint)
+                stringResource(id = R.string.search)
             else
                 t,
             color = if (showHint)
-                Color.Gray
+                Neutral6
             else
-                MaterialTheme.colors.primary,
-            style = MaterialTheme.typography.h4
+                Neutral1,
+            style = DPlusTypography.sectionExtraLargeLight
         )
     }
 }
@@ -74,7 +74,7 @@ fun SearchInput(t: String) {
 @Preview
 @Composable
 fun SearchInputPreview() {
-    SearchInput(t = "search input")
+    SearchInput(t = stringResource(id = R.string.search))
 }
 
 @Composable
@@ -85,9 +85,7 @@ fun DboardButton(
     Button(
         modifier = modifier
             .padding(4.dp),
-        onClick = {
-            model.callback
-        }
+        onClick = model.onClick
     ) {
         Text(textAlign = TextAlign.Center, text = model.char.toString())
     }
@@ -99,16 +97,16 @@ fun handleButtonClick(
     inputTextView: MutableState<String>
 ) {
 
-    inputTextView.value += txt
+    //inputTextView.value += txt
 
-//    dBoardButtonType.let { type ->
-//        when (type) {
-//            DboardButtonType.Clear -> inputTextView.value = ""
-//            DboardButtonType.Delete -> inputTextView.value.dropLast(1)
-//            DboardButtonType.Space -> inputTextView.value += " "
-//            else -> inputTextView.value += txt
-//        }
-//    }
+    dBoardButtonType.let { type ->
+        when (type) {
+            DboardButtonType.Clear -> inputTextView.value = ""
+            DboardButtonType.Delete -> inputTextView.value.dropLast(1)
+            DboardButtonType.Space -> inputTextView.value += " "
+            else -> inputTextView.value += txt
+        }
+    }
 }
 
 
