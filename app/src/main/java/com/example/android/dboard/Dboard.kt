@@ -64,12 +64,12 @@ fun Dboard(model: DboardModel) {
                         }
                     }
 
-                    val spaceRow = mutableListOf<DboardButtonModel>()
-                    val spaceButton = DboardButtonModel(callback = {
+                    val spaceBarRow = mutableListOf<DboardButtonModel>()
+                    val spaceBarButton = DboardButtonModel(callback = {
                         handleButtonClick(dBoardButtonType = DboardButtonType.Space, inputTextView = input)
                     })
-                    spaceRow.add(spaceButton)
-                    DboardRow(buttons = spaceRow)
+                    spaceBarRow.add(spaceBarButton)
+                    DboardRow(buttons = spaceBarRow)
                 }
                 Spacer(modifier = Modifier.height(16.dp))
             }
