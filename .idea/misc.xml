@@ -8,13 +8,16 @@
         <entry key="../../../../../layout/compose-model-1644252669782.xml" value="0.625" />
         <entry key="../../../../../layout/compose-model-1644338505737.xml" value="7.263993966751296" />
         <entry key="../../../../../layout/compose-model-1644339448726.xml" value="0.1" />
+        <entry key="../../../../layout/compose-model-1644427426219.xml" value="0.2791385135135135" />
+        <entry key="../../../../layout/compose-model-1644501470978.xml" value="0.2905405405405405" />
+        <entry key="../../../../layout/compose-model-1644503434584.xml" value="0.4287037037037037" />
         <entry key="app/src/main/res/drawable-anydpi/ic_backspace.xml" value="0.18153846153846154" />
         <entry key="app/src/main/res/drawable-anydpi/ic_spacebar.xml" value="0.18153846153846154" />
         <entry key="app/src/main/res/drawable/dboard_clear.xml" value="0.196875" />
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_15_PREVIEW" project-jdk-name="1.8 (2)" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_15" project-jdk-name="1.8 (2)" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">

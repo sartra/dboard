@@ -99,16 +99,16 @@ fun handleButtonClick(
     inputTextView: MutableState<String>
 ) {
 
-//    inputTextView.value += txt
+    inputTextView.value += txt
 
-    dBoardButtonType.let { type ->
-        when (type) {
-            DboardButtonType.Clear -> inputTextView.value = ""
-            DboardButtonType.Delete -> inputTextView.value.dropLast(1)
-            DboardButtonType.Space -> inputTextView.value += " "
-            else -> inputTextView.value += txt
-        }
-    }
+//    dBoardButtonType.let { type ->
+//        when (type) {
+//            DboardButtonType.Clear -> inputTextView.value = ""
+//            DboardButtonType.Delete -> inputTextView.value.dropLast(1)
+//            DboardButtonType.Space -> inputTextView.value += " "
+//            else -> inputTextView.value += txt
+//        }
+//    }
 }
 
 
@@ -122,7 +122,7 @@ fun DboardRow(
         for (i in buttons) {
             DboardButton(
                 i,
-                modifier = Modifier.weight(1F),
+                modifier = Modifier.weight(1F)
             )
         }
     }
