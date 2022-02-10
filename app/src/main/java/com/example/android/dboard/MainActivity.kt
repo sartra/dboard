@@ -85,9 +85,9 @@ fun DboardButton(
 ) {
     Button(
         modifier = modifier
-            .padding(2.dp)
-            .background(Neutral3_50),
-        onClick = model.onClick
+            .padding(2.dp),
+        onClick = model.onClick,
+        colors =  ButtonDefaults.buttonColors(Neutral3_50)
     ) {
         Text(textAlign = TextAlign.Center, text = model.char.toString())
     }

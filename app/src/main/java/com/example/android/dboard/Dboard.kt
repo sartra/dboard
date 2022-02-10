@@ -57,7 +57,6 @@ fun Dboard(model: DboardModel) {
                     modifier = Modifier
                         .align(Alignment.Start)
                         .width(300.dp)
-                        .background(color = MaterialTheme.colors.primarySurface)
                         .padding(16.dp)
                 ) {
                     // loop through a-z, 0-9
