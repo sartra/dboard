@@ -22,13 +22,9 @@ import kotlinx.coroutines.launch
 @Composable
 fun Dboard() {
     val input = remember { mutableStateOf("") }
-    val state = rememberScrollState()
-    val scope = rememberCoroutineScope()
     val buttonType = DboardButtonType.Char
     val callback = { text: String ->
-//        handleButtonClick(text, buttonType, input)
         handleButtonClick(text, buttonType, input)
-        scope.launch { state.animateScrollTo(state.maxValue) }
     }
 
     BoxWithConstraints(

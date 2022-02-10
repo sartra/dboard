@@ -113,14 +113,12 @@ fun handleButtonClick(
     inputTextView: MutableState<String>
 ) {
 
-//    inputTextView.value += txt
-
     dBoardButtonType.let { type ->
         when (type) {
             DboardButtonType.Clear -> inputTextView.value = ""
             DboardButtonType.Delete -> inputTextView.value.dropLast(1)
             DboardButtonType.Space -> inputTextView.value += " "
-            else -> inputTextView.value += txt
+            DboardButtonType.Char -> inputTextView.value += txt
         }
     }
 }
