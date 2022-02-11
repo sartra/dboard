@@ -10,9 +10,7 @@ import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.lifecycleScope
@@ -88,32 +86,6 @@ fun DboardRow(
                 i,
                 modifier = Modifier.weight(1F)
             )
-        }
-    }
-}
-
-@Composable
-fun DboardButton(
-    model: DboardButtonModel,
-    modifier: Modifier = Modifier
-) {
-    Button(
-        colors = ButtonDefaults.buttonColors(backgroundColor = Neutral3_50),
-        modifier = modifier
-            .padding(2.dp),
-        onClick = model.callback
-    ) {
-        when(model.type) {
-            Char -> {
-                Text(
-                    textAlign = TextAlign.Center,
-                    text = model.char.toString(),
-                    color = Color.White
-                )
-            }
-            BackSpace -> BackSpaceButton()
-            Delete -> DeleteButton()
-            Space -> SpaceBarButton()
         }
     }
 }

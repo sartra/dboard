@@ -45,7 +45,6 @@ fun Dboard(model: DboardModel) {
                 ) {
                     SearchInput(input.value)
                 }
-                Spacer(modifier = Modifier.height(16.dp))
                 Column(
                     modifier = Modifier
                         .align(Alignment.Start)

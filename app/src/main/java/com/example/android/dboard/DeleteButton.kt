@@ -10,7 +10,7 @@ import androidx.compose.ui.tooling.preview.Preview
 
 @Composable
 fun DeleteButton() {
-    Box(contentAlignment = Alignment.Center, modifier = Modifier.padding(top = dimensionResource(R.dimen.grid_8))) {
+    Box(contentAlignment = Alignment.Center) {
         DeleteIcon()
     }
 }

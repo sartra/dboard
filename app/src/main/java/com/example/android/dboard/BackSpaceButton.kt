@@ -10,7 +10,7 @@ import androidx.compose.ui.tooling.preview.Preview
 
 @Composable
 fun BackSpaceButton() {
-    Box(contentAlignment = Alignment.Center, modifier = Modifier.padding(top = dimensionResource(R.dimen.grid_8))) {
+    Box(contentAlignment = Alignment.Center) {
         BackspaceIcon()
     }
 }
