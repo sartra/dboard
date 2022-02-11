@@ -1,4 +1,4 @@
-package com.example.android.dboard
+package com.example.android.dboard.molecules
 
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Button

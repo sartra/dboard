@@ -1,7 +1,6 @@
-package com.example.android.dboard
+package com.example.android.dboard.organisms
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.MaterialTheme
@@ -11,11 +10,12 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.android.dboard.model.DboardButtonModel
 import com.example.android.dboard.model.DboardModel
+import com.example.android.dboard.molecules.DboardRow
+import com.example.android.dboard.molecules.SearchInput
 import com.example.android.dboard.ui.DboardButtonType
 import com.example.android.dboard.ui.DboardButtonType.*
 import com.example.android.dboard.ui.DboardButtonType.Char
@@ -109,7 +109,7 @@ fun DboardPreview() {
         Dboard(
             DboardModel(
                 language = "en",
-                keys = "abcdefghijklmnopqrstuvwxyz0123456789".toList(),
+                keys = "abcdefghijklmnopqrstuvwxyz1234567890".toList(),
                 hasVoiceInput = false
             )
         )
