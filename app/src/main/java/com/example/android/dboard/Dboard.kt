@@ -13,7 +13,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.android.dboard.model.DboardButtonModel
 import com.example.android.dboard.model.DboardModel
-import com.example.android.dboard.ui.DboardButtonType
+import com.example.android.dboard.ui.DboardButtonType.*
+import com.example.android.dboard.ui.DboardButtonType.Char
 import com.example.android.dboard.ui.theme.DPlusTheme
 
 @Composable
@@ -51,11 +52,19 @@ fun Dboard(model: DboardModel) {
                         .width(300.dp)
                         .padding(16.dp)
                 ) {
+                    val deleteButton = DboardButtonModel(type = Delete, callback = {
+                        handleButtonClick(dBoardButtonType = Delete, inputTextView = input)
+                    })
+                    val backSpaceButton = DboardButtonModel(type = BackSpace, callback = {
+                        handleButtonClick(dBoardButtonType = BackSpace, inputTextView = input)
+                    })
+                    DboardRow(buttons = listOf(deleteButton, backSpaceButton))
+
                     // loop through a-z, 0-9
                     val buttonsRow = mutableListOf<DboardButtonModel>()
                     for ((i, value) in model.keys.withIndex()) {
-                        val button = DboardButtonModel(char = value, callback = {
-                            handleButtonClick(value.toString(), DboardButtonType.Char, input)
+                        val button = DboardButtonModel(type = Char, char = value, callback = {
+                            handleButtonClick(value.toString(), Char, input)
                         })
                         buttonsRow.add(button)
                         if ((i + 1) % 6 == 0 && i > 0) {
@@ -63,13 +72,10 @@ fun Dboard(model: DboardModel) {
                             buttonsRow.clear()
                         }
                     }
-
-                    val spaceBarRow = mutableListOf<DboardButtonModel>()
-                    val spaceBarButton = DboardButtonModel(callback = {
-                        handleButtonClick(dBoardButtonType = DboardButtonType.Space, inputTextView = input)
+                    val spaceBarButton = DboardButtonModel(type = Space, callback = {
+                        handleButtonClick(dBoardButtonType = Space, inputTextView = input)
                     })
-                    spaceBarRow.add(spaceBarButton)
-                    DboardRow(buttons = spaceBarRow)
+                    DboardRow(buttons = listOf(spaceBarButton))
                 }
                 Spacer(modifier = Modifier.height(16.dp))
             }

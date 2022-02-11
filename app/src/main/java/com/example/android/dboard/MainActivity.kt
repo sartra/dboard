@@ -4,13 +4,10 @@ import android.media.Image
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.*
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Clear
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.ui.Modifier
@@ -23,8 +20,11 @@ import androidx.lifecycle.lifecycleScope
 import com.example.android.dboard.model.DboardButtonModel
 import com.example.android.dboard.model.DboardModel
 import com.example.android.dboard.ui.DboardButtonType
+import com.example.android.dboard.ui.DboardButtonType.*
+import com.example.android.dboard.ui.DboardButtonType.Char
 import com.example.android.dboard.ui.theme.AppTheme
 import com.example.android.dboard.ui.theme.DPlusTheme
+import com.example.android.dboard.ui.theme.Neutral3_80
 import com.example.android.dboard.ui.theme.appColors
 
 class MainActivity : ComponentActivity() {
@@ -98,20 +98,22 @@ fun DboardButton(
     modifier: Modifier = Modifier
 ) {
     Button(
-        colors = ButtonDefaults.buttonColors(backgroundColor = MaterialTheme.colors.onBackground),
+        colors = ButtonDefaults.buttonColors(backgroundColor = Neutral3_80),
         modifier = modifier
             .padding(2.dp),
         onClick = model.callback
     ) {
-        if(model.type == DboardButtonType.Char) {
-            Text(textAlign = TextAlign.Center, text = model.char.toString(), color= Color.White)
-        } else if (model.type == DboardButtonType.Space) {
-            SpaceBarButton()
-//            Icon(
-//                imageVector = Icons.Filled.Clear,
-//                contentDescription = "Localized description",
-//                modifier = Modifier.padding(end = 8.dp)
-//            )
+        when(model.type) {
+            Char -> {
+                Text(
+                    textAlign = TextAlign.Center,
+                    text = model.char.toString(),
+                    color = Color.White
+                )
+            }
+            BackSpace -> BackSpaceButton()
+            Delete -> DeleteButton()
+            Space -> SpaceBarButton()
         }
     }
 }
@@ -123,10 +125,10 @@ fun handleButtonClick(
 ) {
     dBoardButtonType.let { type ->
         when (type) {
-            DboardButtonType.Clear -> inputTextView.value = ""
-            DboardButtonType.Delete -> inputTextView.value.dropLast(1)
-            DboardButtonType.Space -> inputTextView.value += " "
-            DboardButtonType.Char -> inputTextView.value += txt
+            BackSpace -> inputTextView.value = inputTextView.value.dropLast(1)
+            Delete -> inputTextView.value = ""
+            Space -> inputTextView.value += " "
+            Char -> inputTextView.value += txt
         }
     }
 }

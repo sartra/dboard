@@ -13,7 +13,7 @@ import androidx.compose.ui.tooling.preview.Preview
 @Composable
 fun DeleteIcon() {
     Image(
-        modifier = Modifier.padding(top = dimensionResource(R.dimen.grid_4), start = dimensionResource(R.dimen.grid_8)),
+        modifier = Modifier.padding(top = dimensionResource(R.dimen.grid_8), start = dimensionResource(R.dimen.grid_8)),
         painter = painterResource(R.drawable.ic_delete),
         contentDescription = stringResource(R.string.delete_char),
         alignment = Alignment.Center
