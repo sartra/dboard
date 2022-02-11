@@ -90,21 +90,6 @@ fun DboardRow(
     }
 }
 
-fun handleButtonClick(
-    txt: String? = "",
-    dBoardButtonType: DboardButtonType,
-    inputTextView: MutableState<String>
-) {
-    dBoardButtonType.let { type ->
-        when (type) {
-            BackSpace -> inputTextView.value = inputTextView.value.dropLast(1)
-            Delete -> inputTextView.value = ""
-            Space -> inputTextView.value += " "
-            Char -> inputTextView.value += txt
-        }
-    }
-}
-
 @Preview(showBackground = true)
 @Composable
 fun DefaultPreview() {

@@ -1,9 +1,12 @@
 package com.example.android.dboard
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
@@ -13,6 +16,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.android.dboard.model.DboardButtonModel
 import com.example.android.dboard.model.DboardModel
+import com.example.android.dboard.ui.DboardButtonType
 import com.example.android.dboard.ui.DboardButtonType.*
 import com.example.android.dboard.ui.DboardButtonType.Char
 import com.example.android.dboard.ui.theme.DPlusTheme
@@ -40,7 +44,7 @@ fun Dboard(model: DboardModel) {
                 Row(
                     modifier = Modifier
                         .padding(16.dp)
-                        .background(color = MaterialTheme.colors.onSecondary)
+                        .background(color = MaterialTheme.colors.onSecondary, shape = RoundedCornerShape(5.dp))
                         .height(60.dp)
                 ) {
                     SearchInput(input.value)
@@ -79,6 +83,21 @@ fun Dboard(model: DboardModel) {
                 Spacer(modifier = Modifier.height(16.dp))
             }
 
+        }
+    }
+}
+
+fun handleButtonClick(
+    txt: String? = "",
+    dBoardButtonType: DboardButtonType,
+    inputTextView: MutableState<String>
+) {
+    dBoardButtonType.let { type ->
+        when (type) {
+            BackSpace -> inputTextView.value = inputTextView.value.dropLast(1)
+            Delete -> inputTextView.value = ""
+            Space -> inputTextView.value += " "
+            Char -> inputTextView.value += txt
         }
     }
 }
