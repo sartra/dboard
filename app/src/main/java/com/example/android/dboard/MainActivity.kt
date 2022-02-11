@@ -1,6 +1,5 @@
 package com.example.android.dboard
 
-import android.media.Image
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -22,10 +21,7 @@ import com.example.android.dboard.model.DboardModel
 import com.example.android.dboard.ui.DboardButtonType
 import com.example.android.dboard.ui.DboardButtonType.*
 import com.example.android.dboard.ui.DboardButtonType.Char
-import com.example.android.dboard.ui.theme.AppTheme
-import com.example.android.dboard.ui.theme.DPlusTheme
-import com.example.android.dboard.ui.theme.Neutral3_80
-import com.example.android.dboard.ui.theme.appColors
+import com.example.android.dboard.ui.theme.*
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -37,7 +33,7 @@ class MainActivity : ComponentActivity() {
                         Dboard(
                             DboardModel(
                                 language = "en",
-                                keys = "abcdefghijklmnopqrstuvwxyz0123456789".toList(),
+                                keys = "abcdefghijklmnopqrstuvwxyz1234567890".toList(),
                                 hasVoiceInput = false
                             )
                         )
@@ -58,14 +54,18 @@ fun SearchInput(t: String) {
     ) {
         Text(
             text = if (showHint)
-                stringResource(id = R.string.input_hint)
+                stringResource(id = R.string.search)
             else
                 t,
             color = if (showHint)
-                Color.Gray
+                Neutral6
+                        else
+                Neutral10,
+            style = if (showHint)
+                DPlusTypography.sectionExtraLargeLight
             else
-                Color.LightGray,
-            style = MaterialTheme.typography.h5
+                DPlusTypography.subTitleExtraLarge
+
         )
     }
 }
@@ -98,7 +98,7 @@ fun DboardButton(
     modifier: Modifier = Modifier
 ) {
     Button(
-        colors = ButtonDefaults.buttonColors(backgroundColor = Neutral3_80),
+        colors = ButtonDefaults.buttonColors(backgroundColor = Neutral3_50),
         modifier = modifier
             .padding(2.dp),
         onClick = model.callback
@@ -137,6 +137,6 @@ fun handleButtonClick(
 @Composable
 fun DefaultPreview() {
     DPlusTheme {
-        SearchInput(t = "search input")
+        SearchInput(t = "Search")
     }
 }
