@@ -65,5 +65,5 @@ fun ProvideAppTypography(
 }
 
 private val LocalAppTypography = staticCompositionLocalOf<AppTypography> {
-    error("No DiscoveryTypeScale provided")
+    error("NoTypeScale provided")
 }

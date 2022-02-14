@@ -6,11 +6,6 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
 
-/**
- * Design System is WIP, but, these are the current Typography styles as defined by Design
- * https://www.figma.com/file/yKTYfH9LB4sMC7PkaQjRNM/discovery-Design-System-Guide-WIP?node-id=0%3A1
- */
-
 val appTypography = AppTypography()
 
 @Immutable
@@ -198,7 +193,7 @@ class AppTypography internal constructor(
     )
 
     /**
-     * Returns a copy of this DiscoveryTypeScale, optionally overriding some of the values.
+     * Returns a copy of this TypeScale, optionally overriding some of the values.
      */
     fun copy(
         titleExtraLarge: TextStyle = this.titleExtraLarge,
