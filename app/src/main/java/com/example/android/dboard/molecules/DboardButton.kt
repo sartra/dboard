@@ -3,7 +3,10 @@ package com.example.android.dboard.molecules
 import android.view.KeyEvent.*
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.focusable
+import androidx.compose.foundation.layout.defaultMinSize
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.material.Button
 import androidx.compose.material.ButtonDefaults
@@ -20,6 +23,7 @@ import androidx.compose.ui.input.key.onKeyEvent
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.example.android.dboard.model.DboardButtonModel
 import com.example.android.dboard.ui.DboardButtonType
 import com.example.android.dboard.ui.theme.BrandPrimary
@@ -36,6 +40,7 @@ fun DboardButton(
     Button(
         modifier = modifier
             .padding(2.dp)
+            .defaultMinSize(38.dp, 38.dp)
             .clickable { focusRequester.requestFocus() }
             // The focusRequester should be added BEFORE the focusable.
             .focusRequester(focusRequester)
@@ -65,7 +70,8 @@ fun DboardButton(
                     textAlign = TextAlign.Center,
                     text = model.char.toString(),
                     color = Color.White,
-                    fontWeight = FontWeight.Bold
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 20.sp
                 )
                 if (model.hasFocus) {
                     LaunchedEffect(Unit) {
