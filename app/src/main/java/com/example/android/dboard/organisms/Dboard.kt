@@ -25,16 +25,6 @@ import com.example.android.dboard.ui.theme.DPlusTheme
 fun Dboard(model: DboardModel) {
     val input = remember { mutableStateOf("") }
 
-    var focusState by remember { mutableStateOf("") }
-
-    val focusRequester = FocusRequester()
-
-    // Get a reference to the current FocusManager
-    val focusManager = LocalFocusManager.current
-    var focusDirectionToMove by remember { mutableStateOf<FocusDirection?>(null) }
-
-    val coroutineScope = rememberCoroutineScope()
-
     BoxWithConstraints(
         modifier = Modifier
             .fillMaxSize()
@@ -62,7 +52,7 @@ fun Dboard(model: DboardModel) {
                 Column(
                     modifier = Modifier
                         .align(Alignment.Start)
-                        .width(300.dp)
+                        .width(260.dp)
                         .padding(16.dp)
                 ) {
                     val deleteButton = DboardButtonModel(type = Delete, callback = {
@@ -79,7 +69,7 @@ fun Dboard(model: DboardModel) {
 
                         val button = DboardButtonModel(type = Char, char = value, callback = {
                             handleButtonClick(value.toString(), Char, input)
-                        }, hasFocus = i == 0) // make a be in focus (it should be index 2 with top row hard coded)
+                        }, hasFocus = i == 0) // make a be in focus (it should be index 0 to accommodate other languages, not based on the char)
 
                         buttonsRow.add(button)
 

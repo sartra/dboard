@@ -45,15 +45,18 @@ fun DboardButton(
             .focusable(true)
             .onKeyEvent {
                 if (it.nativeKeyEvent.keyCode == KEYCODE_DPAD_CENTER ||
-                    it.nativeKeyEvent.keyCode == KEYCODE_ENTER && it.nativeKeyEvent.action == ACTION_DOWN) {
+                    it.nativeKeyEvent.keyCode == KEYCODE_ENTER && it.nativeKeyEvent.action == ACTION_DOWN
+                ) {
                     focusRequester.requestFocus()
                     model.callback()
-                    buttonColor = Red
                 }
                 false
             },
         colors = ButtonDefaults.buttonColors(backgroundColor = buttonColor),
-        onClick = model.callback
+        onClick = {
+            focusRequester.requestFocus()
+            model.callback()
+        }
     ) {
 
         when (model.type) {
@@ -64,11 +67,10 @@ fun DboardButton(
                     color = Color.White,
                     fontWeight = FontWeight.Bold
                 )
-                if (model.char == 'a') {
+                if (model.hasFocus) {
                     LaunchedEffect(Unit) {
                         focusRequester.requestFocus()
                     }
-
                 }
             }
             DboardButtonType.BackSpace -> BackSpaceButton()
