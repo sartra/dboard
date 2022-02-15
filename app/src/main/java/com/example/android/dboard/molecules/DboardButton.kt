@@ -4,10 +4,7 @@ import android.view.KeyEvent.*
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.focusable
 import androidx.compose.foundation.layout.defaultMinSize
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.material.Button
 import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.Text
@@ -15,10 +12,6 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.*
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.Color.Companion.Black
-import androidx.compose.ui.graphics.Color.Companion.Green
-import androidx.compose.ui.graphics.Color.Companion.Red
-import androidx.compose.ui.input.key.KeyEvent
 import androidx.compose.ui.input.key.onKeyEvent
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -85,38 +78,3 @@ fun DboardButton(
         }
     }
 }
-
-
-//@Composable
-//private fun FocusMoveTextField(
-//    focusManager: FocusManager,
-//    model: DboardButtonModel
-//) {
-//    DboardButton(
-//        modifier = Modifier
-//            .onKeyEvent { keyEvent ->
-//                when (keyEvent.nativeKeyEvent.keyCode) {
-//                    KEYCODE_DPAD_DOWN -> {
-//                        focusManager.moveFocus(FocusDirection.Down)
-//                        true
-//                    }
-//                    KEYCODE_DPAD_UP -> {
-//                        focusManager.moveFocus(FocusDirection.Up)
-//                        true
-//                    }
-//                    KEYCODE_DPAD_LEFT -> {
-//                        focusManager.moveFocus(FocusDirection.Left)
-//                        true
-//                    }
-//                    KEYCODE_DPAD_RIGHT -> {
-//                        focusManager.moveFocus(FocusDirection.Right)
-//                        true
-//                    }
-//                    else -> {
-//                        false
-//                    }
-//                }
-//            },
-//        model = DboardButtonModel(callback = model.callback, type = model.type)
-//    )
-//}

@@ -52,7 +52,7 @@ fun Dboard(model: DboardModel) {
                 Column(
                     modifier = Modifier
                         .align(Alignment.Start)
-                        .width(300.dp)
+                        .fillMaxWidth(0.33F)
                         .padding(16.dp)
                 ) {
                     val deleteButton = DboardButtonModel(type = Delete, callback = {
