@@ -8,5 +8,5 @@ data class DboardButtonModel(
     val char: Char? = null,
     val icon: Image? = null,
     val callback: (() -> Unit),
-    val buttonHasFocus: Boolean = false
+    val hasFocus: Boolean
 )

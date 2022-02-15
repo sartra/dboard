@@ -4,12 +4,12 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.MaterialTheme
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.MutableState
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.focus.FocusDirection
+import androidx.compose.ui.focus.FocusRequester
+import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.android.dboard.model.DboardButtonModel
@@ -24,6 +24,16 @@ import com.example.android.dboard.ui.theme.DPlusTheme
 @Composable
 fun Dboard(model: DboardModel) {
     val input = remember { mutableStateOf("") }
+
+    var focusState by remember { mutableStateOf("") }
+
+    val focusRequester = FocusRequester()
+
+    // Get a reference to the current FocusManager
+    val focusManager = LocalFocusManager.current
+    var focusDirectionToMove by remember { mutableStateOf<FocusDirection?>(null) }
+
+    val coroutineScope = rememberCoroutineScope()
 
     BoxWithConstraints(
         modifier = Modifier
@@ -57,28 +67,31 @@ fun Dboard(model: DboardModel) {
                 ) {
                     val deleteButton = DboardButtonModel(type = Delete, callback = {
                         handleButtonClick(dBoardButtonType = Delete, inputTextView = input)
-                    })
+                    }, hasFocus = false)
                     val backSpaceButton = DboardButtonModel(type = BackSpace, callback = {
                         handleButtonClick(dBoardButtonType = BackSpace, inputTextView = input)
-                    })
-                    DboardRow(buttons = listOf(deleteButton, backSpaceButton))
+                    }, hasFocus = true)
+                    DboardRow(buttons = listOf(deleteButton, backSpaceButton), false)
 
                     // loop through a-z, 0-9
                     val buttonsRow = mutableListOf<DboardButtonModel>()
                     for ((i, value) in model.keys.withIndex()) {
+
                         val button = DboardButtonModel(type = Char, char = value, callback = {
                             handleButtonClick(value.toString(), Char, input)
-                        })
+                        }, hasFocus = i == 2) // make a be in focus (it should be index 2 with top row hard coded)
+
                         buttonsRow.add(button)
+
                         if ((i + 1) % 6 == 0 && i > 0) {
-                            DboardRow(buttons = buttonsRow)
+                            DboardRow(buttons = buttonsRow, false)
                             buttonsRow.clear()
                         }
                     }
                     val spaceBarButton = DboardButtonModel(type = Space, callback = {
                         handleButtonClick(dBoardButtonType = Space, inputTextView = input)
-                    })
-                    DboardRow(buttons = listOf(spaceBarButton))
+                    }, hasFocus = false)
+                    DboardRow(buttons = listOf(spaceBarButton), false)
                 }
                 Spacer(modifier = Modifier.height(16.dp))
             }
