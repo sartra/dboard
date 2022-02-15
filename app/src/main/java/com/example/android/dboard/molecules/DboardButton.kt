@@ -36,7 +36,7 @@ fun DboardButton(
     Button(
         modifier = modifier
             .padding(2.dp)
-//            .clickable { focusRequester.requestFocus() }
+            .clickable { focusRequester.requestFocus() }
             // The focusRequester should be added BEFORE the focusable.
             .focusRequester(focusRequester)
             // The onFocusChanged should be added BEFORE the focusable that is being observed.
@@ -44,7 +44,8 @@ fun DboardButton(
             .focusTarget()
             .focusable(true)
             .onKeyEvent {
-                if (it.nativeKeyEvent.keyCode == KEYCODE_ENTER) {
+                if (it.nativeKeyEvent.keyCode == KEYCODE_DPAD_CENTER ||
+                    it.nativeKeyEvent.keyCode == KEYCODE_ENTER && it.nativeKeyEvent.action == ACTION_DOWN) {
                     focusRequester.requestFocus()
                     model.callback()
                     buttonColor = Red
@@ -54,6 +55,7 @@ fun DboardButton(
         colors = ButtonDefaults.buttonColors(backgroundColor = buttonColor),
         onClick = model.callback
     ) {
+
         when (model.type) {
             DboardButtonType.Char -> {
                 Text(
@@ -62,6 +64,12 @@ fun DboardButton(
                     color = Color.White,
                     fontWeight = FontWeight.Bold
                 )
+                if (model.char == 'a') {
+                    LaunchedEffect(Unit) {
+                        focusRequester.requestFocus()
+                    }
+
+                }
             }
             DboardButtonType.BackSpace -> BackSpaceButton()
             DboardButtonType.Delete -> DeleteButton()

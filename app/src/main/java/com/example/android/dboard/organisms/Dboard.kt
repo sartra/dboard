@@ -79,7 +79,7 @@ fun Dboard(model: DboardModel) {
 
                         val button = DboardButtonModel(type = Char, char = value, callback = {
                             handleButtonClick(value.toString(), Char, input)
-                        }, hasFocus = i == 2) // make a be in focus (it should be index 2 with top row hard coded)
+                        }, hasFocus = i == 0) // make a be in focus (it should be index 2 with top row hard coded)
 
                         buttonsRow.add(button)
 
