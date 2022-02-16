@@ -9,6 +9,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusDirection
 import androidx.compose.ui.focus.FocusRequester
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -43,16 +44,17 @@ fun Dboard(model: DboardModel) {
             ) {
                 Row(
                     modifier = Modifier
-                        .padding(16.dp)
+                        .padding(12.dp)
                         .background(color = MaterialTheme.colors.onSecondary, shape = RoundedCornerShape(5.dp))
-                        .height(60.dp)
+                        .height(52.dp)
+
                 ) {
                     SearchInput(input.value)
                 }
                 Column(
                     modifier = Modifier
                         .align(Alignment.Start)
-                        .fillMaxWidth(0.33F)
+                        .fillMaxWidth(0.28F)
                         .padding(16.dp)
                 ) {
                     val deleteButton = DboardButtonModel(type = Delete, callback = {

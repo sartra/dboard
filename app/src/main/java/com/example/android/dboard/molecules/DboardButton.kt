@@ -64,7 +64,7 @@ fun DboardButton(
                     text = model.char.toString(),
                     color = Color.White,
                     fontWeight = FontWeight.Bold,
-                    fontSize = 20.sp
+                    fontSize = 14.sp
                 )
                 if (model.hasFocus) {
                     LaunchedEffect(Unit) {

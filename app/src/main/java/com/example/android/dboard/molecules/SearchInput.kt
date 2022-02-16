@@ -2,6 +2,7 @@ package com.example.android.dboard.molecules
 
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -21,6 +22,7 @@ fun SearchInput(t: String) {
         modifier = Modifier
             .padding(16.dp)
             .fillMaxWidth()
+            .height(24.dp)
     ) {
         Text(
             text = if (showHint)
@@ -32,9 +34,9 @@ fun SearchInput(t: String) {
             else
                 Neutral10,
             style = if (showHint)
-                DPlusTypography.sectionExtraLargeLight
+                DPlusTypography.sectionLargeLight
             else
-                DPlusTypography.subTitleExtraLarge
+                DPlusTypography.subTitleLarge
 
         )
     }
