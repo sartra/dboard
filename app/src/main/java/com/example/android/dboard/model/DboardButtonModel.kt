@@ -10,5 +10,5 @@ data class DboardButtonModel(
     val icon: Image? = null,
     val callback: (() -> Unit),
     val hasFocus: Boolean,
-    val modifier: Modifier? = null
+    val description: String  = ""
 )

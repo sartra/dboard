@@ -1,17 +1,13 @@
 package com.example.android.dboard.organisms
 
-import androidx.compose.ui.test.assertIsDisplayed
-import androidx.compose.ui.test.assertTextContains
+import androidx.compose.ui.test.*
 import androidx.compose.ui.test.junit4.createComposeRule
-import androidx.compose.ui.test.onNodeWithContentDescription
-import androidx.compose.ui.test.performClick
 import com.example.android.dboard.model.DboardModel
 import com.example.android.dboard.ui.theme.AppTheme
-import junit.framework.TestCase
 import org.junit.Rule
 import org.junit.Test
 
-class DboardKtTest : TestCase() {
+class DboardKtTest {
 
     private var searchInput = ""
     private var model = DboardModel(
@@ -22,6 +18,8 @@ class DboardKtTest : TestCase() {
 
     @get:Rule
     val composeTestRule = createComposeRule()
+    // use createAndroidComposeRule<YourActivity>() if you need access to
+    // an activity
 
     @Test
     fun testSearchInput() {
@@ -35,13 +33,17 @@ class DboardKtTest : TestCase() {
                 }
             }
 
+            composeTestRule.onNodeWithText("a").performClick()
+
             onNodeWithContentDescription("dBoard_search_input").assertIsDisplayed()
-            // type letters "abc"
+
+//            // type letters "abc"
             onNodeWithContentDescription("dBoard_btn_a").performClick()
-            onNodeWithContentDescription("dBoard_btn_b").performClick()
-            onNodeWithContentDescription("dBoard_btn_c").performClick()
-            // searchInput should have "abc" displayed
-            onNodeWithContentDescription("dBoard_search_input").assertTextContains(searchInput)
+//            onNodeWithContentDescription("dBoard_btn_b").performClick()
+//            onNodeWithContentDescription("dBoard_btn_c").performClick()
+//            // searchInput should have "abc" displayed
+            onNodeWithContentDescription("dBoard_search_input").assertTextContains("a")
+
         }
     }
 

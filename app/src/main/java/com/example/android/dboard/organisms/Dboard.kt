@@ -10,8 +10,6 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.semantics.contentDescription
-import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.android.dboard.model.DboardButtonModel
@@ -63,14 +61,14 @@ fun Dboard(model: DboardModel) {
                         type = Delete,
                         callback = { handleButtonClick(dBoardButtonType = Delete, inputTextView = input) },
                         hasFocus = false,
-                        modifier = Modifier.semantics { contentDescription = "dBoard_btn_delete" }
+                        description = "dBoard_btn_delete"
                     )
 
                     val backSpaceButton = DboardButtonModel(
                         type = BackSpace,
                         callback = { handleButtonClick(dBoardButtonType = BackSpace, inputTextView = input) },
                         hasFocus = true,
-                        modifier = Modifier.semantics { contentDescription = "dBoard_btn_backspace" }
+                        description = "dBoard_btn_backspace"
                     )
 
                     DboardRow(buttons = listOf(deleteButton, backSpaceButton), false)
@@ -81,12 +79,14 @@ fun Dboard(model: DboardModel) {
 
                         val semanticsLabel = "dBoard_btn_{$i}"
 
-                        val button = DboardButtonModel(type = Char, char = value, callback = {
-                            handleButtonClick(value.toString(), Char, input)
-                        }, hasFocus = i == 0, modifier = Modifier
-                            .semantics {
-                                contentDescription = semanticsLabel
-                            }) // make a be in focus (it should be index 0 to accommodate other languages, not based on the char)
+                        val button = DboardButtonModel(
+                            type = Char,
+                            char = value,
+                            callback = {
+                            handleButtonClick(value.toString(), Char, input)},
+                            hasFocus = i == 0,  // make a be in focus (it should be index 0 to accommodate other languages, not based on the char)
+                            description = semanticsLabel
+                        )
 
                         buttonsRow.add(button)
 

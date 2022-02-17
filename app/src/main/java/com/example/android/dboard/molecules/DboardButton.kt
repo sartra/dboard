@@ -13,6 +13,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.*
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.key.onKeyEvent
+import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -27,7 +29,6 @@ fun DboardButton(
     model: DboardButtonModel,
     modifier: Modifier = Modifier,
     focusRequester: FocusRequester = FocusRequester(),
-
 ) {
     var buttonColor by remember { mutableStateOf(Neutral3) }
     Button(
@@ -49,7 +50,8 @@ fun DboardButton(
                     model.callback()
                 }
                 false
-            },
+            }
+            .semantics { contentDescription = model.description },
         colors = ButtonDefaults.buttonColors(backgroundColor = buttonColor),
         onClick = {
             focusRequester.requestFocus()
