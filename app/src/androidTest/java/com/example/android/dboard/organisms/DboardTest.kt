@@ -7,7 +7,7 @@ import com.example.android.dboard.ui.theme.AppTheme
 import org.junit.Rule
 import org.junit.Test
 
-class DboardKtTest {
+class DboardTest {
 
     private var searchInput = ""
     private var model = DboardModel(
@@ -33,14 +33,14 @@ class DboardKtTest {
                 }
             }
 
-            composeTestRule.onNodeWithText("a").performClick()
+//            composeTestRule.onNodeWithText("a").performClick()
 
             onNodeWithContentDescription("dBoard_search_input").assertIsDisplayed()
 
 //            // type letters "abc"
-            onNodeWithContentDescription("dBoard_btn_a").performClick()
-//            onNodeWithContentDescription("dBoard_btn_b").performClick()
-//            onNodeWithContentDescription("dBoard_btn_c").performClick()
+            onNodeWithContentDescription("dBoard_btn_0").performClick() // a
+//            onNodeWithContentDescription("dBoard_btn_1").performClick() // b
+//            onNodeWithContentDescription("dBoard_btn_2").performClick()  // c
 //            // searchInput should have "abc" displayed
             onNodeWithContentDescription("dBoard_search_input").assertTextContains("a")
 
