@@ -2,11 +2,14 @@ package com.example.android.dboard.organisms
 
 import androidx.compose.ui.test.*
 import androidx.compose.ui.test.junit4.createComposeRule
+import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.example.android.dboard.model.DboardModel
 import com.example.android.dboard.ui.theme.AppTheme
 import org.junit.Rule
 import org.junit.Test
+import org.junit.runner.RunWith
 
+@RunWith(AndroidJUnit4::class)
 class DboardTest {
 
     private var searchInput = ""
@@ -33,16 +36,14 @@ class DboardTest {
                 }
             }
 
-//            composeTestRule.onNodeWithText("a").performClick()
-
             onNodeWithContentDescription("dBoard_search_input").assertIsDisplayed()
 
 //            // type letters "abc"
             onNodeWithContentDescription("dBoard_btn_0").performClick() // a
-//            onNodeWithContentDescription("dBoard_btn_1").performClick() // b
-//            onNodeWithContentDescription("dBoard_btn_2").performClick()  // c
+            onNodeWithContentDescription("dBoard_btn_1").performClick() // b
+            onNodeWithContentDescription("dBoard_btn_2").performClick()  // c
 //            // searchInput should have "abc" displayed
-            onNodeWithContentDescription("dBoard_search_input").assertTextContains("a")
+            onNodeWithContentDescription("dBoard_search_input").assertTextContains("abc")
 
         }
     }

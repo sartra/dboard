@@ -1,5 +1,6 @@
 package com.example.android.dboard.organisms
 
+import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -77,7 +78,8 @@ fun Dboard(model: DboardModel) {
                     val buttonsRow = mutableListOf<DboardButtonModel>()
                     for ((i, value) in model.keys.withIndex()) {
 
-                        val semanticsLabel = "dBoard_btn_{$i}"
+                        val semanticsLabel = "dBoard_btn_$i"
+                        Log.d("dboard", semanticsLabel)
 
                         val button = DboardButtonModel(
                             type = Char,
