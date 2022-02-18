@@ -76,30 +76,40 @@ fun Dboard(model: DboardModel) {
 
                     // loop through a-z, 0-9
                     val buttonsRow = mutableListOf<DboardButtonModel>()
-                    for ((i, value) in model.keys.withIndex()) {
+                    for ((keyPosition, value) in model.keys.withIndex()) {
 
-                        val semanticsLabel = "dBoard_btn_$i"
-                        Log.d("dboard", semanticsLabel)
+                        val description = "dBoard_btn_$keyPosition"
+                        Log.d("dboard", description)
 
                         val button = DboardButtonModel(
                             type = Char,
                             char = value,
                             callback = {
-                            handleButtonClick(value.toString(), Char, input)},
-                            hasFocus = i == 0,  // make a be in focus (it should be index 0 to accommodate other languages, not based on the char)
-                            description = semanticsLabel
+                                handleButtonClick(value.toString(), Char, input)
+                            },
+                            hasFocus = keyPosition == 0,  // make a be in focus (it should be index 0 to accommodate other languages, not based on the char)
+                            description = description
                         )
 
                         buttonsRow.add(button)
 
-                        if ((i + 1) % 6 == 0 && i > 0) {
+                        if ((keyPosition + 1) % 6 == 0 && keyPosition > 0) {
                             DboardRow(buttons = buttonsRow, false)
                             buttonsRow.clear()
                         }
                     }
-                    val spaceBarButton = DboardButtonModel(type = Space, callback = {
-                        handleButtonClick(dBoardButtonType = Space, inputTextView = input)
-                    }, hasFocus = false)
+                    val spaceBarButton = DboardButtonModel(
+                        type = Space,
+                        description = "dBoard_btn_space",
+                        callback = {
+                            handleButtonClick(
+                                dBoardButtonType = Space,
+                                inputTextView = input
+                            )
+                        },
+                        hasFocus = false
+                    )
+
                     DboardRow(buttons = listOf(spaceBarButton), false)
                 }
                 Spacer(modifier = Modifier.height(16.dp))
