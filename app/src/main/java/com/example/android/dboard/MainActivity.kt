@@ -22,7 +22,8 @@ class MainActivity : ComponentActivity() {
                             DboardModel(
                                 language = "en",
                                 keys = "abcdefghijklmnopqrstuvwxyz1234567890".toList(),
-                                hasVoiceInput = false
+                                hasVoiceInput = false,
+                                columns = 6
                             )
                         )
                     }

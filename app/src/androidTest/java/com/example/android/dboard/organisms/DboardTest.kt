@@ -1,11 +1,9 @@
 package com.example.android.dboard.organisms
 
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.test.*
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.example.android.dboard.model.DboardModel
-import com.example.android.dboard.ui.DboardButtonType
 import com.example.android.dboard.ui.theme.AppTheme
 import org.junit.Rule
 import org.junit.Test
@@ -14,14 +12,11 @@ import org.junit.runner.RunWith
 @RunWith(AndroidJUnit4::class)
 class DboardTest {
 
-    var txt: String? = ""
-    var dBoardButtonType: DboardButtonType = DboardButtonType.Char
-    var inputTextView = mutableStateOf("")
-
     private var model = DboardModel(
         language = "en",
         keys = "abcdefghijklmnopqrstuvwxyz1234567890".toList(),
-        hasVoiceInput = false
+        hasVoiceInput = false,
+        columns = 6
     )
 
     @get:Rule

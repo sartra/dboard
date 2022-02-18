@@ -93,7 +93,7 @@ fun Dboard(model: DboardModel) {
 
                         buttonsRow.add(button)
 
-                        if ((keyPosition + 1) % 6 == 0 && keyPosition > 0) {
+                        if ((keyPosition + 1) % model.columns == 0 && keyPosition > 0) {
                             DboardRow(buttons = buttonsRow, false)
                             buttonsRow.clear()
                         }
@@ -142,7 +142,8 @@ fun DboardPreview() {
             DboardModel(
                 language = "en",
                 keys = "abcdefghijklmnopqrstuvwxyz1234567890".toList(),
-                hasVoiceInput = false
+                hasVoiceInput = false,
+                columns = 6
             )
         )
     }
