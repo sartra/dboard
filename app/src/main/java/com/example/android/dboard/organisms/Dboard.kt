@@ -26,7 +26,6 @@ import com.example.android.dboard.ui.theme.DPlusTheme
 fun Dboard(model: DboardModel) {
 
     val input = remember { mutableStateOf("") }
-    var rowCount = 0
 
     BoxWithConstraints(
         modifier = Modifier
@@ -74,7 +73,6 @@ fun Dboard(model: DboardModel) {
                     )
 
                     DboardRow(buttons = listOf(deleteButton, backSpaceButton), false)
-                    rowCount++
 
                     // loop through a-z, 0-9
                     val buttonsRow = mutableListOf<DboardButtonModel>()
@@ -98,7 +96,6 @@ fun Dboard(model: DboardModel) {
 
                         if ((keyPosition + 1) % model.columns == 0 && keyPosition > 0) {
                             DboardRow(buttons = buttonsRow, false)
-                            rowCount++
                             buttonsRow.clear()
                         }
                     }
@@ -115,7 +112,6 @@ fun Dboard(model: DboardModel) {
                     )
 
                     DboardRow(buttons = buttonsRow + listOf(spaceBarButton), false)
-                    rowCount++
                 }
                 Spacer(modifier = Modifier.height(16.dp))
             }

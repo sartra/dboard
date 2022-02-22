@@ -25,8 +25,6 @@ fun DboardRow(
         val charButtonsInRow = buttons.count(predicate)
         val spaceWeight = (colSize - charButtonsInRow).toFloat()
 
-        println("~~~buttons: $buttons")
-        println("~~~spaceWeight: $spaceWeight")
         for (button in buttons) {
             val weight = if (button.type == DboardButtonType.Space) spaceWeight else 1F
 
