@@ -16,7 +16,8 @@ class DboardTest {
         language = "en",
         keys = "abcdefghijklmnopqrstuvwxyz1234567890".toList(),
         hasVoiceInput = false,
-        columns = 6
+        columns = 6,
+        maxRows = 9
     )
 
     @get:Rule
