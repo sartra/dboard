@@ -96,7 +96,7 @@ fun Dboard(model: DboardModel) {
                         buttonsRow.add(button)
 
 
-                        if ((keyPosition + 1) % model.columns == 0 && keyPosition > 0 && rowCount <= model.maxRows) {
+                        if ((keyPosition + 1) % model.columns == 0 && keyPosition > 0) {
                             DboardRow(buttons = buttonsRow, false)
                             rowCount++
                             buttonsRow.clear()

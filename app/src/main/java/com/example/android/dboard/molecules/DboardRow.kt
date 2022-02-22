@@ -20,9 +20,12 @@ fun DboardRow(
     Row(
         modifier = Modifier.fillMaxWidth()
     ) {
-        val spaceWeight = ( 5 - buttons.size).toFloat()  // col size - 1 (space) - buttons.size
-        val buttonsSize = buttons.size
-        println("~~~buttons: $buttonsSize")
+        val colSize = 6
+        val predicate: (DboardButtonModel) -> Boolean = {it.type == DboardButtonType.Char}
+        val charButtonsInRow = buttons.count(predicate)
+        val spaceWeight = (colSize - charButtonsInRow).toFloat()
+
+        println("~~~buttons: $buttons")
         println("~~~spaceWeight: $spaceWeight")
         for (button in buttons) {
             val weight = if (button.type == DboardButtonType.Space) spaceWeight else 1F
@@ -31,8 +34,7 @@ fun DboardRow(
                 DboardButton(
                     button,
                     modifier = Modifier
-                        .weight(weight)
-                        .height(40.dp),
+                        .weight(weight),
                     focusRequester
                 )
             } else {
@@ -40,7 +42,6 @@ fun DboardRow(
                     button,
                     modifier = Modifier
                         .weight(weight)
-                        .height(40.dp),
                 )
             }
         }
