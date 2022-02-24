@@ -6,9 +6,7 @@ import androidx.activity.compose.setContent
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.lifecycleScope
-import com.example.android.dboard.model.DboardModel
 import com.example.android.dboard.molecules.SearchInput
-import com.example.android.dboard.organisms.Dboard
 import com.example.android.dboard.ui.theme.*
 
 class MainActivity : ComponentActivity() {
@@ -18,14 +16,14 @@ class MainActivity : ComponentActivity() {
             setContent {
                 DPlusTheme(
                     content = {
-                        Dboard(
-                            DboardModel(
-                                language = "en",
-                                keys = "abcdefghijklmnopqrstuvwxyz1234567890".toList(),
-                                hasVoiceInput = false,
-                                columns = 6
-                            )
-                        )
+//                        Dboard(
+//                            DboardModel(
+//                                language = "en",
+//                                keys = "abcdefghijklmnopqrstuvwxyz1234567890".toList(),
+//                                hasVoiceInput = false,
+//                                columns = 6
+//                            )
+//                        )
                     }
                 )
             }

@@ -12,12 +12,12 @@ import org.junit.runner.RunWith
 @RunWith(AndroidJUnit4::class)
 class DboardTest {
 
-    private var model = DboardModel(
-        language = "en",
-        keys = "abcdefghijklmnopqrstuvwxyz1234567890".toList(),
-        hasVoiceInput = false,
-        columns = 6
-    )
+//    private var model = DboardModel(
+//        language = "en",
+//        keys = "abcdefghijklmnopqrstuvwxyz1234567890".toList(),
+//        hasVoiceInput = false,
+//        columns = 6
+//    )
 
     @get:Rule
     val composeTestRule = createComposeRule()
@@ -30,7 +30,7 @@ class DboardTest {
 
             setContent {
                 AppTheme {
-                    Dboard(model)
+//                    Dboard(model)
                 }
             }
 
