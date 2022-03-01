@@ -1,7 +1,6 @@
 package com.example.android.dboard.model
 
 import android.media.Image
-import androidx.compose.ui.Modifier
 import com.example.android.dboard.ui.DboardButtonType
 
 data class DboardButtonModel(

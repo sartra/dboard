@@ -9,6 +9,7 @@ import androidx.lifecycle.lifecycleScope
 import com.example.android.dboard.model.DboardModel
 import com.example.android.dboard.molecules.SearchInput
 import com.example.android.dboard.organisms.Dboard
+import com.example.android.dboard.organisms.sampleKeys
 import com.example.android.dboard.ui.theme.*
 
 class MainActivity : ComponentActivity() {
@@ -20,11 +21,7 @@ class MainActivity : ComponentActivity() {
                     content = {
                         Dboard(
                             DboardModel(
-                                language = "en",
-                                keys = "Aabcdefghijklmnopqrstuvwxyz1234567890~.".toList(),
-                                hasVoiceInput = false,
-                                columns = 6,
-                                maxRows = 9
+                                keys = sampleKeys
                             )
                         )
                     }
