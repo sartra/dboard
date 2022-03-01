@@ -33,7 +33,7 @@ fun CharButton(char: Key.Char, focusRequester: FocusRequester = FocusRequester()
     var buttonColor by remember { mutableStateOf(Neutral3) }
     Button(
         modifier = Modifier
-            .size(width = 50.dp,height = 40.dp)
+            .size(width = 60.dp,height = 50.dp)
             .clickable { focusRequester.requestFocus() }
             // The focusRequester should be added BEFORE the focusable.
             .focusRequester(focusRequester)
