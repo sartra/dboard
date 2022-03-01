@@ -3,17 +3,14 @@ package com.example.android.dboard.organisms
 import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.*
+import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.semantics.contentDescription
-import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.android.dboard.R
@@ -22,8 +19,6 @@ import com.example.android.dboard.model.DboardModel
 import com.example.android.dboard.model.Key
 import com.example.android.dboard.molecules.ActionButton
 import com.example.android.dboard.molecules.CharButton
-import com.example.android.dboard.ui.DboardButtonType.*
-import com.example.android.dboard.ui.DboardButtonType.Char
 import com.example.android.dboard.ui.theme.DPlusTheme
 
 @Composable
@@ -31,6 +26,17 @@ fun Dboard(model: DboardModel) {
 
     val input = remember { mutableStateOf("") }
     val buttonsRow = mutableListOf<Key>() // CharButton or ActionButton
+
+    val colSize = 6
+    val predicate: (key: Key) -> Boolean = { key ->
+        when (key) {
+            is Key.Char -> true
+            is Key.Action -> false
+        }
+    }
+    // returns how many char keys are in the row - to determine space width
+    val charButtonsInRow = model.keys.count(predicate)
+    val spaceWeight = (colSize - charButtonsInRow).toFloat()
 
     BoxWithConstraints(
         modifier = Modifier
