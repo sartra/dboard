@@ -4,8 +4,6 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.painter.Painter
@@ -18,8 +16,6 @@ import com.example.android.dboard.model.DboardModel
 import com.example.android.dboard.model.Key
 import com.example.android.dboard.molecules.ActionButton
 import com.example.android.dboard.molecules.CharButton
-import com.example.android.dboard.molecules.DboardButton
-import com.example.android.dboard.ui.DboardButtonType
 import com.example.android.dboard.ui.theme.DPlusTheme
 
 
@@ -28,7 +24,8 @@ private const val colSize = 6
 @Composable
 fun Dboard(model: DboardModel) {
 
-    val buttonsRow = mutableListOf<Key>() // for CharButtons only - we can hard code action buttons since they don't change based on language
+    val buttonsRow =
+        mutableListOf<Key>() // for CharButtons only - we can hard code action buttons since they don't change based on language
 
     BoxWithConstraints(
         modifier = Modifier
@@ -46,8 +43,8 @@ fun Dboard(model: DboardModel) {
                 buttonsRow.add(key)  // creates the Char or Action button then adds it to buttonsRow
                 if ((keyIndex + 1) % 6 == 0 && keyIndex > 0) {
                     Row {
-                        buttonsRow.forEach {
-                            KeyRouter(it, modifier = Modifier.weight(1F))
+                        buttonsRow.forEach { key ->
+                            CharButton(key as Key.Char, modifier = Modifier.weight(1F))
                         }
                     }
                     buttonsRow.clear()
@@ -58,20 +55,25 @@ fun Dboard(model: DboardModel) {
             // the remainder left in last row
             Row {
                 buttonsRow.forEach { key ->
-                    KeyRouter(key,  modifier = Modifier
-                            .weight(1F))
+                    CharButton(key as Key.Char, modifier = Modifier.weight(1F))
                 }
-                KeyRouter(key = Key.Action(ActionType.SpaceBar, 2F,false, {}), modifier = Modifier.weight(colSize - buttonsRow.size.toFloat()))
+                ActionButton(
+                    actionBtn = Key.Action(ActionType.SpaceBar, false, {}),
+                    modifier = Modifier.weight(colSize - buttonsRow.size.toFloat())
+                )
+            }
+
+            Row {
+                ActionButton(
+                    actionBtn = Key.Action(ActionType.Backspace, false, {}),
+                    modifier = Modifier.weight(1F).padding(top = 8.dp)
+                )
+                ActionButton(
+                    actionBtn = Key.Action(ActionType.Delete, false, {}),
+                    modifier = Modifier.weight(1F).padding(top = 8.dp)
+                )
             }
         }
-    }
-}
-
-@Composable
-fun KeyRouter(key: Key, modifier: Modifier) {
-    when (key) {
-        is Key.Char -> CharButton(key, modifier)
-        is Key.Action -> ActionButton(key, modifier)
     }
 }
 
@@ -85,20 +87,6 @@ fun actionTypeIconRouter(actionType: ActionType): Painter {
         painterResource(this)
     }
 }
-//
-//@Composable
-//fun handleButtonClick(
-//    actionType: ActionType
-//) {
-//    actionType.let { type ->
-//        when (type) {
-//            BackSpace -> inputTextView.value = inputTextView.value.dropLast(1)
-//            Delete -> inputTextView.value = ""
-//            Space -> inputTextView.value += " "
-//            Char -> inputTextView.value += txt
-//        }
-//    }
-//}
 
 @Preview(showBackground = true)
 @Composable
@@ -120,4 +108,5 @@ fun createCharKeys(chars: String): List<Key> {
     }
     return list
 }
+
 val sampleKeys = createCharKeys(chars)
