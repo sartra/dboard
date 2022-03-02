@@ -28,28 +28,11 @@ private const val colSize = 6
 @Composable
 fun Dboard(model: DboardModel) {
 
-    val input = remember { mutableStateOf("") }
-    val buttonsRow = mutableListOf<Key>() // CharButton or ActionButton
+    val buttonsRow = mutableListOf<Key>() // for CharButtons only - we can hard code action buttons since they don't change based on language
 
-    val predicate: (key: Key) -> Boolean = { key ->
-        when (key) {
-            is Key.Char -> true
-            is Key.Action -> false
-        }
-    }
-    // returns how many char keys are in the row - to determine space width
-    val charButtonsInRow = model.keys.count(predicate)
-    val spaceWeight = (colSize - charButtonsInRow).toFloat()
-
-    val isKeySpace: (type: ActionType) -> Boolean = { type ->
-        when (type) {
-            is ActionType.SpaceBar -> true
-            else -> false
-        }
-    }
     BoxWithConstraints(
         modifier = Modifier
-            .fillMaxSize()
+            .width(400.dp)
             .background(color = MaterialTheme.colors.surface),
         contentAlignment = Alignment.TopStart
     ) {
@@ -61,9 +44,7 @@ fun Dboard(model: DboardModel) {
         ) {
             for ((keyIndex, key) in model.keys.withIndex()) {
                 buttonsRow.add(key)  // creates the Char or Action button then adds it to buttonsRow
-
                 if ((keyIndex + 1) % 6 == 0 && keyIndex > 0) {
-
                     Row {
                         buttonsRow.forEach {
                             KeyRouter(it, modifier = Modifier.weight(1F))

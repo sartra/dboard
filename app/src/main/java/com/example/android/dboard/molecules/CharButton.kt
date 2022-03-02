@@ -3,10 +3,7 @@ package com.example.android.dboard.molecules
 import android.view.KeyEvent
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.focusable
-import androidx.compose.foundation.layout.defaultMinSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.*
 import androidx.compose.material.Button
 import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.Text
@@ -37,7 +34,8 @@ fun CharButton(
     var buttonColor by remember { mutableStateOf(Neutral3) }
     Button(
         modifier = modifier
-            .size(width = 60.dp,height = 52.dp)
+            .requiredWidth(60.dp)
+            .requiredHeight(52.dp)
             .clickable { focusRequester.requestFocus() }
             // The focusRequester should be added BEFORE the focusable.
             .focusRequester(focusRequester)

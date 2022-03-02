@@ -45,7 +45,7 @@ fun ActionButton(
     var buttonColor by remember { mutableStateOf(Neutral3) }
     Button(
         modifier = modifier
-            .size(width = 60.dp, height = 52.dp)
+            .requiredHeight(52.dp)
             .clickable { focusRequester.requestFocus() }
             // The focusRequester should be added BEFORE the focusable.
             .focusRequester(focusRequester)
