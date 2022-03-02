@@ -7,6 +7,7 @@ data class DboardModel(
 sealed class Key {
     data class Action(
         val type: ActionType,
+        val weight: Float,
         val hasFocus: Boolean,
         val onClick: (ActionType) -> Unit) : Key()
 

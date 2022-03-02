@@ -29,11 +29,15 @@ import com.example.android.dboard.ui.theme.BrandPrimary
 import com.example.android.dboard.ui.theme.Neutral3
 
 @Composable
-fun CharButton(char: Key.Char, focusRequester: FocusRequester = FocusRequester()) {
+fun CharButton(
+    char: Key.Char,
+    modifier: Modifier = Modifier,
+    focusRequester: FocusRequester = FocusRequester()
+) {
     var buttonColor by remember { mutableStateOf(Neutral3) }
     Button(
-        modifier = Modifier
-            .size(width = 60.dp,height = 50.dp)
+        modifier = modifier
+            .size(width = 60.dp,height = 52.dp)
             .clickable { focusRequester.requestFocus() }
             // The focusRequester should be added BEFORE the focusable.
             .focusRequester(focusRequester)

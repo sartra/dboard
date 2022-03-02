@@ -1,17 +1,13 @@
 package com.example.android.dboard.molecules
 
 import android.view.KeyEvent
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.focusable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Button
 import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.Icon
-import androidx.compose.material.IconButton
 import androidx.compose.runtime.*
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
@@ -22,17 +18,34 @@ import androidx.compose.ui.input.key.onKeyEvent
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.unit.dp
+import com.example.android.dboard.model.DboardModel
 import com.example.android.dboard.model.Key
 import com.example.android.dboard.organisms.actionTypeIconRouter
 import com.example.android.dboard.ui.theme.BrandPrimary
 import com.example.android.dboard.ui.theme.Neutral3
 
+const val colSize = 6
+
 @Composable
-fun ActionButton(actionBtn: Key.Action, focusRequester: FocusRequester = FocusRequester()) {
+fun ActionButton(
+    actionBtn: Key.Action,
+    modifier: Modifier = Modifier,
+    focusRequester: FocusRequester = FocusRequester()
+) {
+//    val predicate: (key: Key) -> Boolean = { key ->
+//        when (key) {
+//            is Key.Char -> true
+//            is Key.Action -> false
+//        }
+//    }
+//    // returns how many char keys are in the row - to determine space width
+//    val charButtonsInRow = DboardModel.keys.count(predicate)
+//    val spaceWeight = (colSize - charButtonsInRow).toFloat()
+
     var buttonColor by remember { mutableStateOf(Neutral3) }
     Button(
-        modifier = Modifier
-            .size(width = 60.dp, height = 50.dp)
+        modifier = modifier
+            .size(width = 60.dp, height = 52.dp)
             .clickable { focusRequester.requestFocus() }
             // The focusRequester should be added BEFORE the focusable.
             .focusRequester(focusRequester)
@@ -61,7 +74,6 @@ fun ActionButton(actionBtn: Key.Action, focusRequester: FocusRequester = FocusRe
             contentDescription = "Icon",
             tint = Color.White,
             modifier = Modifier
-//                .height(30.dp)
                 .semantics { contentDescription = "$actionBtn.type" }
         )
 

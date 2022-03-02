@@ -1,6 +1,5 @@
 package com.example.android.dboard.organisms
 
-import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.MaterialTheme
@@ -19,7 +18,12 @@ import com.example.android.dboard.model.DboardModel
 import com.example.android.dboard.model.Key
 import com.example.android.dboard.molecules.ActionButton
 import com.example.android.dboard.molecules.CharButton
+import com.example.android.dboard.molecules.DboardButton
+import com.example.android.dboard.ui.DboardButtonType
 import com.example.android.dboard.ui.theme.DPlusTheme
+
+
+private const val colSize = 6
 
 @Composable
 fun Dboard(model: DboardModel) {
@@ -27,7 +31,6 @@ fun Dboard(model: DboardModel) {
     val input = remember { mutableStateOf("") }
     val buttonsRow = mutableListOf<Key>() // CharButton or ActionButton
 
-    val colSize = 6
     val predicate: (key: Key) -> Boolean = { key ->
         when (key) {
             is Key.Char -> true
@@ -38,6 +41,12 @@ fun Dboard(model: DboardModel) {
     val charButtonsInRow = model.keys.count(predicate)
     val spaceWeight = (colSize - charButtonsInRow).toFloat()
 
+    val isKeySpace: (type: ActionType) -> Boolean = { type ->
+        when (type) {
+            is ActionType.SpaceBar -> true
+            else -> false
+        }
+    }
     BoxWithConstraints(
         modifier = Modifier
             .fillMaxSize()
@@ -55,34 +64,33 @@ fun Dboard(model: DboardModel) {
 
                 if ((keyIndex + 1) % 6 == 0 && keyIndex > 0) {
 
-                    Row(modifier = Modifier
-                        .fillMaxWidth(1F)
-                    ) {
+                    Row {
                         buttonsRow.forEach {
-                            KeyRouter(it)
+                            KeyRouter(it, modifier = Modifier.weight(1F))
                         }
                     }
-                    Log.d("dboard", "~~~buttonsRow: $buttonsRow\n")
                     buttonsRow.clear()
                     Spacer(modifier = Modifier.height(8.dp))
                 }
             }
 
             // the remainder left in last row
-            Row(modifier = Modifier.fillMaxWidth(1F)) {
-                buttonsRow.forEach {
-                    KeyRouter(it)
+            Row {
+                buttonsRow.forEach { key ->
+                    KeyRouter(key,  modifier = Modifier
+                            .weight(1F))
                 }
+                KeyRouter(key = Key.Action(ActionType.SpaceBar, 2F,false, {}), modifier = Modifier.weight(colSize - buttonsRow.size.toFloat()))
             }
         }
     }
 }
 
 @Composable
-fun KeyRouter(key: Key) {
+fun KeyRouter(key: Key, modifier: Modifier) {
     when (key) {
-        is Key.Char -> CharButton(key)
-        is Key.Action -> ActionButton(key)
+        is Key.Char -> CharButton(key, modifier)
+        is Key.Action -> ActionButton(key, modifier)
     }
 }
 
@@ -123,46 +131,12 @@ fun DboardPreview() {
     }
 }
 
-val sampleKeys = listOf(
-    Key.Char("a", true, {}),
-    Key.Char("b", false, {}),
-    Key.Char("c", false, {}),
-    Key.Char("d", false, {}),
-    Key.Char("e", false, {}),
-    Key.Char("è", false, {}),
-    Key.Char("f", false, {}),
-    Key.Char("g", false, {}),
-    Key.Char("h", false, {}),
-    Key.Char("i", false, {}),
-    Key.Char("j", false, {}),
-    Key.Char("k", false, {}),
-    Key.Char("l", false, {}),
-    Key.Char("m", false, {}),
-    Key.Char("n", false, {}),
-    Key.Char("o", false, {}),
-    Key.Char("ö", false, {}),
-    Key.Char("p", false, {}),
-    Key.Char("q", false, {}),
-    Key.Char("r", false, {}),
-    Key.Char("s", false, {}),
-    Key.Char("t", false, {}),
-    Key.Char("u", false, {}),
-    Key.Char("v", false, {}),
-    Key.Char("w", false, {}),
-    Key.Char("x", false, {}),
-    Key.Char("y", false, {}),
-    Key.Char("z", false, {}),
-    Key.Char("1", false, {}),
-    Key.Char("2", false, {}),
-    Key.Char("3", false, {}),
-    Key.Char("4", false, {}),
-    Key.Char("5", false, {}),
-    Key.Char("6", false, {}),
-    Key.Char("7", false, {}),
-    Key.Char("8", false, {}),
-    Key.Char("9", false, {}),
-    Key.Char("0", false, {}),
-    Key.Action(ActionType.SpaceBar, false, {}),
-    Key.Action(ActionType.Delete, false, {}),
-    Key.Action(ActionType.Backspace, false, {})
-)
+const val chars = "abcdeèfghijklmnoöpqrstuvwxyz1234567890"
+fun createCharKeys(chars: String): List<Key> {
+    val list = mutableListOf<Key>()
+    chars.forEach { char ->
+        list.add(Key.Char(char.toString(), true, {}))
+    }
+    return list
+}
+val sampleKeys = createCharKeys(chars)
