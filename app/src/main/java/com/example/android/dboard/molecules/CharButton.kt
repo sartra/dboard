@@ -48,7 +48,6 @@ fun CharButton(
                     it.nativeKeyEvent.keyCode == KeyEvent.KEYCODE_ENTER && it.nativeKeyEvent.action == KeyEvent.ACTION_DOWN
                 ) {
                     focusRequester.requestFocus()
-//                    model.callback()
                 }
                 false
             }

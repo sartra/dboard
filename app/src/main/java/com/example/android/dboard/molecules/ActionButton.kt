@@ -18,13 +18,10 @@ import androidx.compose.ui.input.key.onKeyEvent
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.unit.dp
-import com.example.android.dboard.model.DboardModel
 import com.example.android.dboard.model.Key
 import com.example.android.dboard.organisms.actionTypeIconRouter
 import com.example.android.dboard.ui.theme.BrandPrimary
 import com.example.android.dboard.ui.theme.Neutral3
-
-const val colSize = 6
 
 @Composable
 fun ActionButton(
@@ -32,16 +29,6 @@ fun ActionButton(
     modifier: Modifier = Modifier,
     focusRequester: FocusRequester = FocusRequester()
 ) {
-//    val predicate: (key: Key) -> Boolean = { key ->
-//        when (key) {
-//            is Key.Char -> true
-//            is Key.Action -> false
-//        }
-//    }
-//    // returns how many char keys are in the row - to determine space width
-//    val charButtonsInRow = DboardModel.keys.count(predicate)
-//    val spaceWeight = (colSize - charButtonsInRow).toFloat()
-
     var buttonColor by remember { mutableStateOf(Neutral3) }
     Button(
         modifier = modifier
@@ -58,7 +45,6 @@ fun ActionButton(
                     it.nativeKeyEvent.keyCode == KeyEvent.KEYCODE_ENTER && it.nativeKeyEvent.action == KeyEvent.ACTION_DOWN
                 ) {
                     focusRequester.requestFocus()
-//                    model.callback()
                 }
                 false
             }
